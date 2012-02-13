@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cz.cvut.fit</groupId>
 	<artifactId>mi_mpr_dip-admission</artifactId>
@@ -26,7 +26,7 @@
 		<javax.validation.version>1.0.0.GA</javax.validation.version>
 		<jetty.version>6.1.26</jetty.version>
 		<logback.version>1.0.0</logback.version>
-		<roo.version>1.2.0.RELEASE</roo.version>
+		<roo.version>1.2.1.RELEASE</roo.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
 		<spring.ws.version>2.0.3.RELEASE</spring.ws.version>
@@ -68,6 +68,34 @@
 			<id>spring-roo-repository</id>
 			<name>Spring Roo Repository</name>
 			<url>http://spring-roo-repository.springsource.org/release</url>
+		</repository>
+		<!-- jBPM repository / use this repository for stable releases -->
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<!-- jBPM repository / use this repository for snapshot releases -->
+		<repository>
+			<id>jboss-snapshot-repository-group</id>
+			<name>JBoss SNAPSHOT Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/repositories/snapshots/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</snapshots>
 		</repository>
 	</repositories>
 	<pluginRepositories>
@@ -319,17 +347,22 @@
 			<version>${easymock.version}</version>
 			<scope>test</scope>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.testng</groupId> -->
-<!-- 			<artifactId>testng</artifactId> -->
-<!-- 			<version>${testng.version}</version> -->
-<!-- 			<scope>test</scope> -->
-<!-- 		</dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.testng</groupId> -->
+		<!-- <artifactId>testng</artifactId> -->
+		<!-- <version>${testng.version}</version> -->
+		<!-- <scope>test</scope> -->
+		<!-- </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-bpmn2</artifactId>
+			<version>5.2.0.Final</version>
 		</dependency>
 	</dependencies>
 
@@ -345,9 +378,11 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>${aspectj.maven.version}</version>
-				<!-- NB: do not use 1.3 or 1.3.x due to MASPECTJ-90 and do not use 1.4 due to declare parents issue -->
+				<!-- NB: do not use 1.3 or 1.3.x due to MASPECTJ-90 and do not use 1.4 
+					due to declare parents issue -->
 				<dependencies>
-					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see MNG-2972) -->
+					<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see 
+						MNG-2972) -->
 					<dependency>
 						<groupId>org.aspectj</groupId>
 						<artifactId>aspectjrt</artifactId>
