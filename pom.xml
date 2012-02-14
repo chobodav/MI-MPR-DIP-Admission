@@ -364,6 +364,11 @@
 			<artifactId>jbpm-bpmn2</artifactId>
 			<version>5.2.0.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jbpm</groupId>
+			<artifactId>jbpm-human-task</artifactId>
+			<version>5.2.0.Final</version>
+		</dependency>
 	</dependencies>
 
 	<build>
